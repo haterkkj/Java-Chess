@@ -1,6 +1,5 @@
 package application;
 
-import chess.ChessException;
 import chess.ChessPiece;
 import chess.ChessPosition;
 import chess.Color;
@@ -42,21 +41,35 @@ public class UI {
         for(int i = 0; i < pieces.length; i++) {
             System.out.printf("%d ", 8-i);
             for(int j = 0; j < pieces.length; j++) {
-                printPiece(pieces[i][j]);
+                printPiece(pieces[i][j], false);
             }
             System.out.println();
         }
         System.out.println("  a b c d e f g h");
     }
 
-    private static void printPiece(ChessPiece piece) {
+    public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
+        for(int i = 0; i < pieces.length; i++) {
+            System.out.printf("%d ", 8-i);
+            for(int j = 0; j < pieces.length; j++) {
+                printPiece(pieces[i][j], possibleMoves[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println("  a b c d e f g h");
+    }
+
+    private static void printPiece(ChessPiece piece, boolean hasBackgroundColor) {
+        if(hasBackgroundColor) {
+            System.out.print(ANSI_BLUE_BACKGROUND);
+        }
         if(piece == null) {
-            System.out.print("_ ");
+            System.out.print("_" + ANSI_RESET + " ");
         } else {
             if(piece.getColor() == Color.WHITE) {
-                System.out.print(ANSI_WHITE + piece + " " + ANSI_RESET);
+                System.out.print(ANSI_WHITE + piece + ANSI_RESET + " ");
             } else {
-                System.out.print(ANSI_YELLOW + piece + " " + ANSI_RESET);
+                System.out.print(ANSI_YELLOW + piece + ANSI_RESET + " ");
             }
         }
     }
