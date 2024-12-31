@@ -23,7 +23,7 @@ public class Rook extends ChessPiece {
             p.setRow(p.getRow() - 1);
         }
         if(getBoard().positionExists(p)) {
-            possibleMoves[p.getRow()][p.getCol()] = getBoard().thereIsAPiece(p) && isThereOpponentPiece(p);
+            possibleMoves[p.getRow()][p.getCol()] = isThereOpponentPiece(p);
         }
 
         // verifying valid positions on below the piece
@@ -33,7 +33,7 @@ public class Rook extends ChessPiece {
             p.setRow(p.getRow() + 1);
         }
         if(getBoard().positionExists(p)) {
-            possibleMoves[p.getRow()][p.getCol()] = getBoard().thereIsAPiece(p) && isThereOpponentPiece(p);
+            possibleMoves[p.getRow()][p.getCol()] = isThereOpponentPiece(p);
         }
 
         // verifying valid positions on left the piece
@@ -43,7 +43,7 @@ public class Rook extends ChessPiece {
             p.setCol(p.getCol() - 1);
         }
         if(getBoard().positionExists(p)) {
-            possibleMoves[p.getRow()][p.getCol()] = getBoard().thereIsAPiece(p) && isThereOpponentPiece(p);
+            possibleMoves[p.getRow()][p.getCol()] = isThereOpponentPiece(p);
         }
 
         // verifying valid positions on right the piece
@@ -53,7 +53,7 @@ public class Rook extends ChessPiece {
             p.setCol(p.getCol() + 1);
         }
         if(getBoard().positionExists(p)) {
-            possibleMoves[p.getRow()][p.getCol()] = getBoard().thereIsAPiece(p) && isThereOpponentPiece(p);
+            possibleMoves[p.getRow()][p.getCol()] = isThereOpponentPiece(p);
         }
 
         return possibleMoves;
