@@ -17,52 +17,17 @@ public class King extends ChessPiece {
 
         Position p = new Position(0,0);
 
-        // above
-        p.setValue(position.getRow() - 1, position.getCol());
-        if (getBoard().positionExists(p)) {
-            possibleMoves[p.getRow()][p.getCol()] = !getBoard().thereIsAPiece(p) || isThereOpponentPiece(p);
-        }
+        for(int i = -1; i < 2; i++) {
+            for(int j = -1; j < 2; j++) {
+                if(j == 0 && i == 0) {
+                    continue;
+                }
 
-        // below
-        p.setValue(position.getRow() + 1, position.getCol());
-        if (getBoard().positionExists(p)) {
-            possibleMoves[p.getRow()][p.getCol()] = !getBoard().thereIsAPiece(p) || isThereOpponentPiece(p);
-        }
-
-        // left
-        p.setValue(position.getRow(), position.getCol() - 1);
-        if (getBoard().positionExists(p)) {
-            possibleMoves[p.getRow()][p.getCol()] = !getBoard().thereIsAPiece(p) || isThereOpponentPiece(p);
-        }
-
-        // right
-        p.setValue(position.getRow(), position.getCol() + 1);
-        if (getBoard().positionExists(p)) {
-            possibleMoves[p.getRow()][p.getCol()] = !getBoard().thereIsAPiece(p) || isThereOpponentPiece(p);
-        }
-
-        // nw
-        p.setValue(position.getRow() + 1, position.getCol() + 1);
-        if (getBoard().positionExists(p)) {
-            possibleMoves[p.getRow()][p.getCol()] = !getBoard().thereIsAPiece(p) || isThereOpponentPiece(p);
-        }
-
-        // ne
-        p.setValue(position.getRow() + 1, position.getCol() - 1);
-        if (getBoard().positionExists(p)) {
-            possibleMoves[p.getRow()][p.getCol()] = !getBoard().thereIsAPiece(p) || isThereOpponentPiece(p);
-        }
-
-        // sw
-        p.setValue(position.getRow() - 1, position.getCol() + 1);
-        if (getBoard().positionExists(p)) {
-            possibleMoves[p.getRow()][p.getCol()] = !getBoard().thereIsAPiece(p) || isThereOpponentPiece(p);
-        }
-
-        // se
-        p.setValue(position.getRow() - 1, position.getCol() - 1);
-        if (getBoard().positionExists(p)) {
-            possibleMoves[p.getRow()][p.getCol()] = !getBoard().thereIsAPiece(p) || isThereOpponentPiece(p);
+                p.setValue(position.getRow() - i, position.getCol() - j);
+                if (getBoard().positionExists(p)) {
+                    possibleMoves[p.getRow()][p.getCol()] = !getBoard().thereIsAPiece(p) || isThereOpponentPiece(p);
+                }
+            }
         }
 
         return possibleMoves;
