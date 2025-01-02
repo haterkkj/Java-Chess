@@ -6,7 +6,10 @@ import chess.ChessPiece;
 import chess.ChessPosition;
 import chess.Color;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
 
 public class UI {
     public static final String ANSI_RESET = "\u001B[0m";
@@ -46,33 +49,33 @@ public class UI {
         System.out.println();
         System.out.println("Turn: " + chessMatch.getTurn());
 
-        if(chessMatch.isCheckMate()) {
+        if (chessMatch.isCheckMate()) {
             System.out.println("Checkmate!");
             System.out.println(
                     colorCode +
-                    chessMatch.getCurrentPlayer() +
-                    ANSI_RESET +
-                    " Wins!"
+                            chessMatch.getCurrentPlayer() +
+                            ANSI_RESET +
+                            " Wins!"
             );
             return;
         }
 
         System.out.println("Waiting player: " + colorCode + chessMatch.getCurrentPlayer() + ANSI_RESET);
 
-        if(chessMatch.isCheck()) {
+        if (chessMatch.isCheck()) {
             System.out.println(
                     colorCode +
-                    chessMatch.getCurrentPlayer() +
-                    ANSI_RESET +
-                    " are in check!"
+                            chessMatch.getCurrentPlayer() +
+                            ANSI_RESET +
+                            " are in check!"
             );
         }
     }
 
     public static void printBoard(ChessPiece[][] pieces) {
-        for(int i = 0; i < pieces.length; i++) {
-            System.out.printf("%d ", 8-i);
-            for(int j = 0; j < pieces.length; j++) {
+        for (int i = 0; i < pieces.length; i++) {
+            System.out.printf("%d ", 8 - i);
+            for (int j = 0; j < pieces.length; j++) {
                 printPiece(pieces[i][j], false);
             }
             System.out.println();
@@ -81,9 +84,9 @@ public class UI {
     }
 
     public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
-        for(int i = 0; i < pieces.length; i++) {
-            System.out.printf("%d ", 8-i);
-            for(int j = 0; j < pieces.length; j++) {
+        for (int i = 0; i < pieces.length; i++) {
+            System.out.printf("%d ", 8 - i);
+            for (int j = 0; j < pieces.length; j++) {
                 printPiece(pieces[i][j], possibleMoves[i][j]);
             }
             System.out.println();
@@ -92,13 +95,13 @@ public class UI {
     }
 
     private static void printPiece(ChessPiece piece, boolean hasBackgroundColor) {
-        if(hasBackgroundColor) {
+        if (hasBackgroundColor) {
             System.out.print(ANSI_BLUE_BACKGROUND);
         }
-        if(piece == null) {
+        if (piece == null) {
             System.out.print("-" + ANSI_RESET + " ");
         } else {
-            if(piece.getColor() == Color.WHITE) {
+            if (piece.getColor() == Color.WHITE) {
                 System.out.print(ANSI_WHITE + piece + ANSI_RESET + " ");
             } else {
                 System.out.print(ANSI_YELLOW + piece + ANSI_RESET + " ");

@@ -17,38 +17,38 @@ public class Bishop extends ChessPiece {
         Position p = new Position(0, 0);
 
         p.setValue(position.getRow() - 1, position.getCol() - 1);
-        while(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
+        while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
             possibleMoves[p.getRow()][p.getCol()] = true;
             p.setValue(p.getRow() - 1, p.getCol() - 1);
         }
-        if(getBoard().positionExists(p)) {
+        if (getBoard().positionExists(p)) {
             possibleMoves[p.getRow()][p.getCol()] = isThereOpponentPiece(p);
         }
 
         p.setValue(position.getRow() - 1, position.getCol() + 1);
-        while(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
+        while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
             possibleMoves[p.getRow()][p.getCol()] = true;
             p.setValue(p.getRow() - 1, p.getCol() + 1);
         }
-        if(getBoard().positionExists(p)) {
+        if (getBoard().positionExists(p)) {
             possibleMoves[p.getRow()][p.getCol()] = isThereOpponentPiece(p);
         }
 
         p.setValue(position.getRow() + 1, position.getCol() - 1);
-        while(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
+        while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
             possibleMoves[p.getRow()][p.getCol()] = true;
             p.setValue(p.getRow() + 1, p.getCol() - 1);
         }
-        if(getBoard().positionExists(p)) {
+        if (getBoard().positionExists(p)) {
             possibleMoves[p.getRow()][p.getCol()] = isThereOpponentPiece(p);
         }
 
         p.setValue(position.getRow() + 1, position.getCol() + 1);
-        while(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
+        while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
             possibleMoves[p.getRow()][p.getCol()] = true;
             p.setValue(p.getRow() + 1, p.getCol() + 1);
         }
-        if(getBoard().positionExists(p)) {
+        if (getBoard().positionExists(p)) {
             possibleMoves[p.getRow()][p.getCol()] = isThereOpponentPiece(p);
         }
 
