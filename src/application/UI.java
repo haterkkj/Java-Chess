@@ -39,15 +39,27 @@ public class UI {
     }
 
     public static void printMatch(ChessMatch chessMatch, List<ChessPiece> capturedPieces) {
+        String colorCode = chessMatch.getCurrentPlayer() == Color.WHITE ? ANSI_WHITE : ANSI_YELLOW;
         printBoard(chessMatch.getPieces());
         System.out.println();
         printCapturedPieces(capturedPieces);
         System.out.println();
         System.out.println("Turn: " + chessMatch.getTurn());
-        String colorCode = chessMatch.getCurrentPlayer() == Color.WHITE ? ANSI_WHITE : ANSI_YELLOW;
+
+        if(chessMatch.isCheckMate()) {
+            System.out.println("Checkmate!");
+            System.out.println(
+                    colorCode +
+                    chessMatch.getCurrentPlayer() +
+                    ANSI_RESET +
+                    " Wins!"
+            );
+            return;
+        }
+
         System.out.println("Waiting player: " + colorCode + chessMatch.getCurrentPlayer() + ANSI_RESET);
-        if(chessMatch.getCheck()) {
-            colorCode = chessMatch.getCurrentPlayer() == Color.WHITE ? ANSI_WHITE : ANSI_YELLOW;
+
+        if(chessMatch.isCheck()) {
             System.out.println(
                     colorCode +
                     chessMatch.getCurrentPlayer() +
