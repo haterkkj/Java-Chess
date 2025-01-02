@@ -53,9 +53,9 @@ public class UI {
             System.out.println("Checkmate!");
             System.out.println(
                     colorCode +
-                            chessMatch.getCurrentPlayer() +
-                            ANSI_RESET +
-                            " Wins!"
+                    chessMatch.getCurrentPlayer() +
+                    ANSI_RESET +
+                    " Wins!"
             );
             return;
         }
@@ -65,9 +65,9 @@ public class UI {
         if (chessMatch.isCheck()) {
             System.out.println(
                     colorCode +
-                            chessMatch.getCurrentPlayer() +
-                            ANSI_RESET +
-                            " are in check!"
+                    chessMatch.getCurrentPlayer() +
+                    ANSI_RESET +
+                    " are in check!"
             );
         }
     }

@@ -2,12 +2,16 @@ package chess.pieces;
 
 import boardgame.Board;
 import boardgame.Position;
+import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.Color;
 
 public class King extends ChessPiece {
-    public King(Board board, Color color) {
+    private ChessMatch chessMatch;
+
+    public King(Board board, Color color, ChessMatch chessMatch) {
         super(board, color);
+        this.chessMatch = chessMatch;
     }
 
     @Override
@@ -29,14 +33,39 @@ public class King extends ChessPiece {
             }
         }
 
+        // specialmove castling
+        if (getMoveCount() == 0 && !chessMatch.isCheck()) {
+            Position auxPos = new Position(0, 0);
+
+            // kingside rook
+            auxPos.setValue(position.getRow(), position.getCol() + 3);
+            if (testRookCastling(auxPos)) {
+                Position auxPos1 = new Position(position.getRow(), position.getCol() + 1);
+                Position auxPos2 = new Position(position.getRow(), position.getCol() + 2);
+                if(!getBoard().thereIsAPiece(auxPos1) && !getBoard().thereIsAPiece(auxPos2)) {
+                    possibleMoves[auxPos1.getRow()][auxPos2.getCol()] = true;
+                }
+            }
+
+            // queenside rook
+            auxPos.setValue(position.getRow(), position.getCol() - 4);
+            if (testRookCastling(auxPos)) {
+                Position auxPos1 = new Position(position.getRow(), position.getCol() + 1);
+                Position auxPos2 = new Position(position.getRow(), position.getCol() + 2);
+                Position auxPos3 = new Position(position.getRow(), position.getCol() + 3);
+                if(!getBoard().thereIsAPiece(auxPos1) && !getBoard().thereIsAPiece(auxPos2) && !getBoard().thereIsAPiece(auxPos3)) {
+                    possibleMoves[auxPos2.getRow()][auxPos2.getCol()] = true;
+                }
+            }
+        }
+
         return possibleMoves;
     }
 
-    private boolean canMove(Position position) {
+    private boolean testRookCastling(Position position) {
         ChessPiece p = (ChessPiece) getBoard().piece(position);
-        return p == null || p.getColor() != getColor();
+        return p instanceof Rook && p.getMoveCount() == 0 && p.getColor() == getColor();
     }
-
 
     @Override
     public String toString() {
