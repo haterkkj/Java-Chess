@@ -3,8 +3,7 @@ package chess;
 import boardgame.Board;
 import boardgame.Piece;
 import boardgame.Position;
-import chess.pieces.King;
-import chess.pieces.Rook;
+import chess.pieces.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +92,8 @@ public class ChessMatch {
     }
 
     private Piece makeMove(Position source, Position target) {
-        Piece p = board.removePiece(source);
+        ChessPiece p = (ChessPiece) board.removePiece(source);
+        p.increaseMoveCount();
         Piece capturedPiece = board.removePiece(target);
         board.placePiece(p, target);
 
@@ -106,7 +106,8 @@ public class ChessMatch {
     }
 
     private void undoMove(Position source, Position target, Piece capturedPiece) {
-        Piece p = board.removePiece(target);
+        ChessPiece p = (ChessPiece) board.removePiece(target);
+        p.decreaseMoveCount();
         board.placePiece(p, source);
 
         if(capturedPiece != null) {
@@ -173,12 +174,29 @@ public class ChessMatch {
     }
 
     private void initialSetup() {
-        placeNewPiece(new Rook(board, Color.WHITE), 'h', 7);
-        placeNewPiece(new Rook(board, Color.WHITE), 'd', 1);
+        placeNewPiece(new Rook(board, Color.WHITE), 'a', 1);
         placeNewPiece(new King(board, Color.WHITE), 'e', 1);
+        placeNewPiece(new Rook(board, Color.WHITE), 'h', 1);
+        placeNewPiece(new Pawn(board, Color.WHITE), 'a', 2);
+        placeNewPiece(new Pawn(board, Color.WHITE), 'b', 2);
+        placeNewPiece(new Pawn(board, Color.WHITE), 'c', 2);
+        placeNewPiece(new Pawn(board, Color.WHITE), 'd', 2);
+        placeNewPiece(new Pawn(board, Color.WHITE), 'e', 2);
+        placeNewPiece(new Pawn(board, Color.WHITE), 'f', 2);
+        placeNewPiece(new Pawn(board, Color.WHITE), 'g', 2);
+        placeNewPiece(new Pawn(board, Color.WHITE), 'h', 2);
 
-        placeNewPiece(new Rook(board, Color.BLACK), 'b', 8);
-        placeNewPiece(new King(board, Color.BLACK), 'a', 8);
+        placeNewPiece(new Rook(board, Color.BLACK), 'a', 8);
+        placeNewPiece(new King(board, Color.BLACK), 'e', 8);
+        placeNewPiece(new Rook(board, Color.BLACK), 'h', 8);
+        placeNewPiece(new Pawn(board, Color.BLACK), 'a', 7);
+        placeNewPiece(new Pawn(board, Color.BLACK), 'b', 7);
+        placeNewPiece(new Pawn(board, Color.BLACK), 'c', 7);
+        placeNewPiece(new Pawn(board, Color.BLACK), 'd', 7);
+        placeNewPiece(new Pawn(board, Color.BLACK), 'e', 7);
+        placeNewPiece(new Pawn(board, Color.BLACK), 'f', 7);
+        placeNewPiece(new Pawn(board, Color.BLACK), 'g', 7);
+        placeNewPiece(new Pawn(board, Color.BLACK), 'h', 7);
     }
 
     public boolean isCheckMate() {
