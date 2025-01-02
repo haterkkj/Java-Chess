@@ -46,6 +46,15 @@ public class UI {
         System.out.println("Turn: " + chessMatch.getTurn());
         String colorCode = chessMatch.getCurrentPlayer() == Color.WHITE ? ANSI_WHITE : ANSI_YELLOW;
         System.out.println("Waiting player: " + colorCode + chessMatch.getCurrentPlayer() + ANSI_RESET);
+        if(chessMatch.getCheck()) {
+            colorCode = chessMatch.getCurrentPlayer() == Color.WHITE ? ANSI_WHITE : ANSI_YELLOW;
+            System.out.println(
+                    colorCode +
+                    chessMatch.getCurrentPlayer() +
+                    ANSI_RESET +
+                    " are in check!"
+            );
+        }
     }
 
     public static void printBoard(ChessPiece[][] pieces) {
