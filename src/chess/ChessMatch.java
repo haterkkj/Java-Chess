@@ -5,7 +5,6 @@ import boardgame.Piece;
 import boardgame.Position;
 import chess.pieces.*;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -97,7 +96,7 @@ public class ChessMatch {
         }
 
         if(!type.equals("B") && !type.equals("R") && !type.equals("Q") && !type.equals("N")) {
-            throw new InvalidParameterException("Error: invalid type for promotion");
+            return promoted;
         }
 
         Position pos = promoted.getPosition();
