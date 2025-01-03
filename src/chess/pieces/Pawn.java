@@ -7,8 +7,11 @@ import chess.ChessPiece;
 import chess.Color;
 
 public class Pawn extends ChessPiece {
-    public Pawn(Board board, Color color) {
+    private ChessMatch chessMatch;
+
+    public Pawn(Board board, Color color, ChessMatch chessMatch) {
         super(board, color);
+        this.chessMatch = chessMatch;
     }
 
     @Override
@@ -38,7 +41,24 @@ public class Pawn extends ChessPiece {
             possibleMoves[p.getRow()][p.getCol()] = isThereOpponentPiece(p);
         }
 
-        // sm
+        // sm en passant
+        int rowForEnPassant = getColor() == Color.WHITE ? 3 : 4;
+        if(getPosition().getRow() == rowForEnPassant) {
+            Position left = new Position(position.getRow(), position.getCol() - 1);
+
+            if(getBoard().positionExists(left)) {
+                if(isThereOpponentPiece(left) && getBoard().piece(left) == chessMatch.getEnPassentVulnerable()) {
+                    possibleMoves[left.getRow() - 1][left.getCol()] = true;
+                }
+            }
+
+            Position right = new Position(position.getRow(), position.getCol() + 1);
+            if(getBoard().positionExists(right)) {
+                if(isThereOpponentPiece(right) && getBoard().piece(right) == chessMatch.getEnPassentVulnerable()) {
+                    possibleMoves[right.getRow() - 1][right.getCol()] = true;
+                }
+            }
+        }
 
         return possibleMoves;
     }
