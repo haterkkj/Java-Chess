@@ -24,8 +24,8 @@ public class ChessMatch {
         this.board = new Board(8, 8);
         turn = 1;
         currentPlayer = Color.WHITE;
-        piecesOnTheBoard = new ArrayList<ChessPiece>();
-        capturedPieces = new ArrayList<ChessPiece>();
+        piecesOnTheBoard = new ArrayList<>();
+        capturedPieces = new ArrayList<>();
         initialSetup();
     }
 
@@ -302,16 +302,8 @@ public class ChessMatch {
         return turn;
     }
 
-    public void setTurn(int turn) {
-        this.turn = turn;
-    }
-
     public Color getCurrentPlayer() {
         return currentPlayer;
-    }
-
-    public void setCurrentPlayer(Color currentPlayer) {
-        this.currentPlayer = currentPlayer;
     }
 
     public List<ChessPiece> getCapturedPieces() {
