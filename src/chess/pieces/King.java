@@ -7,7 +7,7 @@ import chess.ChessPiece;
 import chess.Color;
 
 public class King extends ChessPiece {
-    private ChessMatch chessMatch;
+    private final ChessMatch chessMatch;
 
     public King(Board board, Color color, ChessMatch chessMatch) {
         super(board, color);
@@ -42,7 +42,7 @@ public class King extends ChessPiece {
             if (testRookCastling(auxPos)) {
                 Position auxPos1 = new Position(position.getRow(), position.getCol() + 1);
                 Position auxPos2 = new Position(position.getRow(), position.getCol() + 2);
-                if(!getBoard().thereIsAPiece(auxPos1) && !getBoard().thereIsAPiece(auxPos2)) {
+                if (!getBoard().thereIsAPiece(auxPos1) && !getBoard().thereIsAPiece(auxPos2)) {
                     possibleMoves[auxPos1.getRow()][auxPos2.getCol()] = true;
                 }
             }
@@ -53,7 +53,7 @@ public class King extends ChessPiece {
                 Position auxPos1 = new Position(position.getRow(), position.getCol() + 1);
                 Position auxPos2 = new Position(position.getRow(), position.getCol() + 2);
                 Position auxPos3 = new Position(position.getRow(), position.getCol() + 3);
-                if(!getBoard().thereIsAPiece(auxPos1) && !getBoard().thereIsAPiece(auxPos2) && !getBoard().thereIsAPiece(auxPos3)) {
+                if (!getBoard().thereIsAPiece(auxPos1) && !getBoard().thereIsAPiece(auxPos2) && !getBoard().thereIsAPiece(auxPos3)) {
                     possibleMoves[auxPos2.getRow()][auxPos2.getCol()] = true;
                 }
             }

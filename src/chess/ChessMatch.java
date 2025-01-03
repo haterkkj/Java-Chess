@@ -18,8 +18,8 @@ public class ChessMatch {
     private ChessPiece enPassentVulnerable;
     private ChessPiece promoted;
 
-    private List<ChessPiece> piecesOnTheBoard;
-    private List<ChessPiece> capturedPieces;
+    private final List<ChessPiece> piecesOnTheBoard;
+    private final List<ChessPiece> capturedPieces;
 
     public ChessMatch() {
         this.board = new Board(8, 8);
@@ -63,7 +63,7 @@ public class ChessMatch {
 
         if (movedPiece instanceof Pawn && ((Pawn) movedPiece).getMoveCount() == 1) {
             int casesAdvanced = ((Pawn) movedPiece).getColor() == Color.WHITE ? -2 : 2;
-            if(source.getRow() + casesAdvanced == target.getRow()) {
+            if (source.getRow() + casesAdvanced == target.getRow()) {
                 enPassentVulnerable = (ChessPiece) movedPiece;
             } else {
                 enPassentVulnerable = null;
@@ -73,7 +73,7 @@ public class ChessMatch {
         promoted = null;
         if (movedPiece instanceof Pawn) {
             int lastRow = ((Pawn) movedPiece).getColor() == Color.WHITE ? 0 : 7;
-            if(movedPiece.getPosition().getRow() == lastRow) {
+            if (movedPiece.getPosition().getRow() == lastRow) {
                 promoted = (ChessPiece) movedPiece;
                 promoted = replacePromotedPiece("Q");
             }
@@ -91,11 +91,11 @@ public class ChessMatch {
     }
 
     public ChessPiece replacePromotedPiece(String type) {
-        if(promoted == null) {
+        if (promoted == null) {
             throw new IllegalStateException("Error: There is no piece to be promoted");
         }
 
-        if(!type.equals("B") && !type.equals("R") && !type.equals("Q") && !type.equals("N")) {
+        if (!type.equals("B") && !type.equals("R") && !type.equals("Q") && !type.equals("N")) {
             return promoted;
         }
 
@@ -154,7 +154,7 @@ public class ChessMatch {
         }
 
         // sm kingside rook
-        if(p instanceof King && target.getCol() == source.getCol() + 2) {
+        if (p instanceof King && target.getCol() == source.getCol() + 2) {
             Position sourceT = new Position(source.getRow(), source.getCol() + 3);
             Position targetT = new Position(source.getRow(), source.getCol() + 1);
             ChessPiece rook = (ChessPiece) board.removePiece(sourceT);
@@ -163,7 +163,7 @@ public class ChessMatch {
         }
 
         // sm queenside rook
-        if(p instanceof King && target.getCol() == source.getCol() - 2) {
+        if (p instanceof King && target.getCol() == source.getCol() - 2) {
             Position sourceT = new Position(source.getRow(), source.getCol() - 4);
             Position targetT = new Position(source.getRow(), source.getCol() - 1);
             ChessPiece rook = (ChessPiece) board.removePiece(sourceT);
@@ -172,9 +172,9 @@ public class ChessMatch {
         }
 
         // sm en passant
-        if(p instanceof Pawn) {
+        if (p instanceof Pawn) {
             if (source.getCol() != target.getCol() && capturedPiece == null) {
-                Position capturedPiecePosition = p.getColor() == Color.WHITE ? new Position (target.getRow() + 1, target.getCol()) : new Position(target.getRow() - 1, target.getCol());
+                Position capturedPiecePosition = p.getColor() == Color.WHITE ? new Position(target.getRow() + 1, target.getCol()) : new Position(target.getRow() - 1, target.getCol());
                 capturedPiece = board.removePiece(capturedPiecePosition);
                 capturedPieces.add((ChessPiece) capturedPiece);
                 piecesOnTheBoard.remove((ChessPiece) capturedPiece);
@@ -190,7 +190,7 @@ public class ChessMatch {
         board.placePiece(p, source);
 
         // sm en passant
-        if(p instanceof Pawn) {
+        if (p instanceof Pawn) {
             if (source.getCol() != target.getCol() && capturedPiece == enPassentVulnerable) {
                 ChessPiece pawn = (ChessPiece) board.removePiece(target);
                 Position capturedPawnPos = oponnent(pawn.getColor()) == Color.WHITE ? new Position(3, target.getCol()) : new Position(4, source.getCol());
@@ -213,7 +213,7 @@ public class ChessMatch {
         }
 
         // sm kingside rook
-        if(p instanceof King && target.getCol() == source.getCol() + 2) {
+        if (p instanceof King && target.getCol() == source.getCol() + 2) {
             Position sourceT = new Position(source.getRow(), source.getCol() + 3);
             Position targetT = new Position(source.getRow(), source.getCol() + 1);
             ChessPiece rook = (ChessPiece) board.removePiece(targetT);
@@ -222,7 +222,7 @@ public class ChessMatch {
         }
 
         // sm queenside rook
-        if(p instanceof King && target.getCol() == source.getCol() - 2) {
+        if (p instanceof King && target.getCol() == source.getCol() - 2) {
             Position sourceT = new Position(source.getRow(), source.getCol() - 4);
             Position targetT = new Position(source.getRow(), source.getCol() - 1);
             ChessPiece rook = (ChessPiece) board.removePiece(targetT);
