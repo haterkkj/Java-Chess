@@ -63,7 +63,7 @@ public class ChessMatch {
 
         if (movedPiece instanceof Pawn && ((Pawn) movedPiece).getMoveCount() == 1) {
             int casesAdvanced = ((Pawn) movedPiece).getColor() == Color.WHITE ? -2 : 2;
-            if(source.getRow() - casesAdvanced == target.getRow()) {
+            if(source.getRow() + casesAdvanced == target.getRow()) {
                 enPassentVulnerable = (ChessPiece) movedPiece;
             } else {
                 enPassentVulnerable = null;

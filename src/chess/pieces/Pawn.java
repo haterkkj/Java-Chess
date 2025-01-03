@@ -45,7 +45,6 @@ public class Pawn extends ChessPiece {
         int rowForEnPassant = getColor() == Color.WHITE ? 3 : 4;
         if(getPosition().getRow() == rowForEnPassant) {
             Position left = new Position(position.getRow(), position.getCol() - 1);
-
             if(getBoard().positionExists(left)) {
                 if(isThereOpponentPiece(left) && getBoard().piece(left) == chessMatch.getEnPassentVulnerable()) {
                     possibleMoves[left.getRow() - 1][left.getCol()] = true;
